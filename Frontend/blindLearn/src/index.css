@@ -13,3 +13,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+label { 
+  font-size:40px;
+}
