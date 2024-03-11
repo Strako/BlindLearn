@@ -1,0 +1,2 @@
+export const tutorialLogin = "Para ingresar tu nombre de usuario presiona la barra espaciadora"
+export const tutorialHome = "Las categorías son: 1 categoría A, 2 categoría B, 3 categoría C, 4 categoría D, presiona la barra espaciadora e indica la categoría a seleccionar"
