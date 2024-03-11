@@ -16,7 +16,7 @@ const contentStyle: React.CSSProperties = {
 const Home = () => {
     //Constants
     const [voiceString, setVoiceString] = useState<string>("");
-    const [validFlag, setValidFlag] = useState<boolean>(false);
+    const [validFlag, setValidFlag] = useState<boolean>();
     const [selectedOption, setSelectedOption] = useState<number>()
     const carrouselRef = useRef<HTMLDivElement>(null)
     const navigate = useNavigate();
@@ -26,22 +26,29 @@ const Home = () => {
     }
 
     const handlerSelectedOption = () => {
-        console.log("hola" + voiceString)
-        setSelectedOption(-1);
-        if (voiceString === "categoría 1") {
-            setSelectedOption(0);
-            setValidFlag(true);
-        } else if (voiceString === "categoría 2") {
-            setSelectedOption(1);
-            setValidFlag(true);
-        } else if (voiceString === "categoría 3") {
-            setSelectedOption(2);
-            setValidFlag(true);
-        } else if (voiceString === "categoría 4") {
-            setSelectedOption(3);
-            setValidFlag(true);
+       // console.log("Voice string " + voiceString + "selected option: " + selectedOption)
+        //Cambiar por switchcase
+        switch (voiceString) {
+            case "categoría 1":
+                setSelectedOption(1);
+                setValidFlag(true);
+                break;
+            case "categoría 2":
+                setSelectedOption(2);
+                setValidFlag(true);
+                break;
+            case "categoría 3":
+                setSelectedOption(3);
+                setValidFlag(true);
+                break;
+            case "categoría 4":
+                setSelectedOption(4);
+                setValidFlag(true);
+                break;
+            default:
+                setSelectedOption(0);
+                setValidFlag(false);
         }
-        
     };
 
     const handleKeyPress = (event: any) => {
@@ -53,6 +60,7 @@ const Home = () => {
         }
         if (event.key === 'Enter') {
             handlerSelectedOption();
+
         }
     };
 
@@ -66,7 +74,6 @@ const Home = () => {
     recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
         setVoiceString(transcript);
-        console.log("Recognition: -" + transcript);
         speak("Presiona la tecla enter para ingresar a la categoría: " + transcript)
 
 
@@ -79,26 +86,23 @@ const Home = () => {
 
     //Functions
     const onChange = (currentSlide: number) => {
-        console.log("Slide: " + currentSlide);
-        setSelectedOption(currentSlide)
+        setSelectedOption(currentSlide);    
+        
     };
 
     //useEffect Hooks
     useEffect(() => {
         carrouselRef.current?.focus();
-
         window.addEventListener('keydown', handleKeyPress)
     });
 
-    useEffect(() =>{
-        if (!validFlag  && selectedOption){
+    useEffect(() => {
+        if (!validFlag && selectedOption == 0) {
+            console.log({"validFlag": validFlag, "selectedOption": selectedOption});
             speak("La opción no es valida");
-            console.log("speak funciton castrosa: "  + selectedOption);
-
-            console.log(validFlag)
-        }
-        if(selectedOption != -1 && selectedOption){
-        navigate("/"+selectedOption)
+        }else if (validFlag && selectedOption) {
+            console.log({"validFlag": validFlag, "selectedOption": selectedOption});
+            navigate("/" + selectedOption)
         }
     }, [validFlag, selectedOption]);
     return (
