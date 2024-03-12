@@ -46,9 +46,11 @@ const Home = () => {
                 setValidFlag(true);
                 break;
             default:
+                if(voiceString != ""){
                 setSelectedOption(0);
                 setValidFlag(false);
-        }
+                }
+            }
     };
 
     const handleKeyPress = (event: any) => {
@@ -86,7 +88,6 @@ const Home = () => {
 
     //Functions
     const onChange = (currentSlide: number) => {
-        setSelectedOption(currentSlide);    
         
     };
 
@@ -97,14 +98,14 @@ const Home = () => {
     });
 
     useEffect(() => {
-        if (!validFlag && selectedOption == 0) {
+        if (!validFlag && validFlag != undefined) {
             console.log({"validFlag": validFlag, "selectedOption": selectedOption});
             speak("La opción no es valida");
-        }else if (validFlag && selectedOption) {
+        }else if (validFlag && validFlag != undefined) {
             console.log({"validFlag": validFlag, "selectedOption": selectedOption});
             navigate("/" + selectedOption)
         }
-    }, [validFlag, selectedOption]);
+    }, [selectedOption, validFlag]);
     return (
         <>
             <h1> Home ! </h1>
