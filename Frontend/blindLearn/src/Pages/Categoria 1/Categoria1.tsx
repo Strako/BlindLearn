@@ -13,7 +13,7 @@ const contentStyle: React.CSSProperties = {
     background: '#364d79',
 };
 
-const Home = () => {
+const Categoria1 = () => {
     //Constants
     const [validFlag, setValidFlag] = useState<boolean>();
     const [selectedOption, setSelectedOption] = useState<number>()
@@ -34,15 +34,15 @@ const Home = () => {
             //    setVoiceString(transcript);
             console.log("handler selected option: " + transcript)
             switch (transcript) {
-                case 'categoría 1':
+                case 'subcategoría 1':
                     setSelectedOption(0);
                     setValidFlag(true);
                     break;
-                case 'categoría 2':
+                case 'subcategoría 2':
                     setSelectedOption(1);
                     setValidFlag(true);
                     break;
-                case 'categoría 3':
+                case 'subcategoría 3':
                     setSelectedOption(2);
                     setValidFlag(true);
                     break;
@@ -100,7 +100,7 @@ const Home = () => {
             console.log(validFlag)
         }
         if (selectedOption != undefined && selectedOption !== -1) {
-            navigate("/categoria/" + selectedOption)
+            navigate("/subcategoría/" + selectedOption)
         }
     }, [validFlag, selectedOption]);
     return (
@@ -121,4 +121,4 @@ const Home = () => {
     )
 };
 
-export default Home;
+export default Categoria1;
