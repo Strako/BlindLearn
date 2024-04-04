@@ -1,8 +1,10 @@
 import { Carousel } from 'antd';
 import speak from '../../Utils/TextToSpeech/TextToSpeech';
 import { useEffect, useRef, useState } from 'react';
-import { tutorialHome } from '../../Utils/TextToSpeech/tutorialsMessages';
-import { useNavigate } from 'react-router-dom';
+import { tutorialCategory } from '../../Utils/TextToSpeech/tutorialsMessages';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+
 
 const contentStyle: React.CSSProperties = {
     margin: 0,
@@ -13,12 +15,14 @@ const contentStyle: React.CSSProperties = {
     background: '#364d79',
 };
 
-const Categoria1 = () => {
+const Categorias = () => {
     //Constants
     const [validFlag, setValidFlag] = useState<boolean>();
     const [selectedOption, setSelectedOption] = useState<number>()
     const carrouselRef = useRef<HTMLDivElement>(null)
     const navigate = useNavigate();
+    const { state } = useLocation();
+    const { categoryID } = state;
 
     //Voice Recognition
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
@@ -34,16 +38,16 @@ const Categoria1 = () => {
             //    setVoiceString(transcript);
             console.log("handler selected option: " + transcript)
             switch (transcript) {
-                case 'subcategoría 1':
-                    setSelectedOption(0);
-                    setValidFlag(true);
-                    break;
-                case 'subcategoría 2':
+                case 'tema 1':
                     setSelectedOption(1);
                     setValidFlag(true);
                     break;
-                case 'subcategoría 3':
+                case 'tema 2':
                     setSelectedOption(2);
+                    setValidFlag(true);
+                    break;
+                case 'tema 3':
+                    setSelectedOption(3);
                     setValidFlag(true);
                     break;
                 default:
@@ -69,7 +73,7 @@ const Categoria1 = () => {
  */
     const handleKeyPress = (event: any) => {
         if (event.key === 'Escape') {
-            speak(tutorialHome);
+            speak(tutorialCategory);
         }
         if (event.key === ' ') {
             voiceHandler();
@@ -100,25 +104,44 @@ const Categoria1 = () => {
             console.log(validFlag)
         }
         if (selectedOption != undefined && selectedOption !== -1) {
-            navigate("/subcategoría/" + selectedOption)
+            navigate("/temas/" + selectedOption.toString())
         }
     }, [validFlag, selectedOption]);
+
+    const renderCategory = () => {
+        switch (categoryID) {
+            case 1:
+                return <h1> Categoría 1 ! </h1>
+                break;
+            case 2:
+                return <h1> Categoría 2 ! </h1>
+                break;
+            case 3:
+                return <h1> Categoría 3 ! </h1>
+                break;
+            default:
+                return <h1> Categoría no ecnontrada ! </h1>
+                break;
+        }
+    }
+
+//    console.log(categoryID);
     return (
         <>
-            <h1> Home ! </h1>
+        {renderCategory()}
             <Carousel afterChange={onChange}>
                 <div ref={carrouselRef} >
-                    <h3 style={contentStyle}>1</h3>
+                    <h3 style={contentStyle}>Tema 1</h3>
                 </div>
                 <div>
-                    <h3 style={contentStyle}>2</h3>
+                    <h3 style={contentStyle}>Tema 2</h3>
                 </div>
                 <div>
-                    <h3 style={contentStyle}>3</h3>
+                    <h3 style={contentStyle}>Tema 3</h3>
                 </div>
             </Carousel>
         </>
     )
 };
 
-export default Categoria1;
+export default Categorias;

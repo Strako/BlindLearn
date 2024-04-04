@@ -2,7 +2,9 @@ import { Carousel } from 'antd';
 import speak from '../../Utils/TextToSpeech/TextToSpeech';
 import { useEffect, useRef, useState } from 'react';
 import { tutorialHome } from '../../Utils/TextToSpeech/tutorialsMessages';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+
 
 const contentStyle: React.CSSProperties = {
     margin: 0,
@@ -13,12 +15,13 @@ const contentStyle: React.CSSProperties = {
     background: '#364d79',
 };
 
-const Home = () => {
+const Tema1 = () => {
     //Constants
     const [validFlag, setValidFlag] = useState<boolean>();
     const [selectedOption, setSelectedOption] = useState<number>()
     const carrouselRef = useRef<HTMLDivElement>(null)
     const navigate = useNavigate();
+
 
     //Voice Recognition
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
@@ -34,16 +37,16 @@ const Home = () => {
             //    setVoiceString(transcript);
             console.log("handler selected option: " + transcript)
             switch (transcript) {
-                case 'categoría 1':
+                case 'tema 1':
+                    setSelectedOption(0);
+                    setValidFlag(true);
+                    break;
+                case 'tema 2':
                     setSelectedOption(1);
                     setValidFlag(true);
                     break;
-                case 'categoría 2':
+                case 'tema 3':
                     setSelectedOption(2);
-                    setValidFlag(true);
-                    break;
-                case 'categoría 3':
-                    setSelectedOption(3);
                     setValidFlag(true);
                     break;
                 default:
@@ -100,12 +103,14 @@ const Home = () => {
             console.log(validFlag)
         }
         if (selectedOption != undefined && selectedOption !== -1) {
-            navigate("/categorias/", {state:{ categoryID: selectedOption}})
+            navigate("/subcategoría/" + selectedOption)
         }
     }, [validFlag, selectedOption]);
+
+    //    console.log(categoryID);
     return (
         <>
-            <h1> Home ! </h1>
+            <h1> Tema 1 ! </h1>
             <Carousel afterChange={onChange}>
                 <div ref={carrouselRef} >
                     <h3 style={contentStyle}>1</h3>
@@ -121,4 +126,4 @@ const Home = () => {
     )
 };
 
-export default Home;
+export default Tema1;
