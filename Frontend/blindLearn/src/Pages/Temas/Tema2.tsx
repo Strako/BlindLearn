@@ -2,7 +2,7 @@ import { Carousel } from 'antd';
 import speak from '../../Utils/TextToSpeech/TextToSpeech';
 import { useEffect, useRef, useState } from 'react';
 import { tutorialHome } from '../../Utils/TextToSpeech/tutorialsMessages';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 

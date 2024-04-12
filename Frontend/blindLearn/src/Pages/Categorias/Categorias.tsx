@@ -1,9 +1,8 @@
 import { Carousel } from 'antd';
 import speak from '../../Utils/TextToSpeech/TextToSpeech';
 import { useEffect, useRef, useState } from 'react';
-import { tutorialCategory } from '../../Utils/TextToSpeech/tutorialsMessages';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import selectMessage from '../../Utils/SelectTextToSpech/SelectTextToSpeech';
 
 
 const contentStyle: React.CSSProperties = {
@@ -23,6 +22,8 @@ const Categorias = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const { categoryID } = state;
+
+
 
     //Voice Recognition
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
@@ -50,6 +51,18 @@ const Categorias = () => {
                     setSelectedOption(3);
                     setValidFlag(true);
                     break;
+                case 'tema 4':
+                    setSelectedOption(4);
+                    setValidFlag(true);
+                    break;
+                case 'tema 5':
+                    setSelectedOption(5);
+                    setValidFlag(true);
+                    break;
+                case 'tema 6':
+                    setSelectedOption(6);
+                    setValidFlag(true);
+                    break;
                 default:
                     setSelectedOption(-1);
                     setValidFlag(false)
@@ -73,16 +86,15 @@ const Categorias = () => {
  */
     const handleKeyPress = (event: any) => {
         if (event.key === 'Escape') {
-            speak(tutorialCategory);
+            speak(selectMessage(categoryID) ?? "");
         }
         if (event.key === ' ') {
             voiceHandler();
         }
-        //      if (event.key === 'Enter') {
-        //          handlerSelectedOption();
-        //      }
     };
 
+
+    //Select the correct message for the tutorial
 
 
     //Functions
@@ -92,10 +104,11 @@ const Categorias = () => {
 
     //useEffect Hooks
     useEffect(() => {
-        carrouselRef.current?.focus();
-
-        window.addEventListener('keydown', handleKeyPress)
-    });
+        window.addEventListener('keydown', handleKeyPress);
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, []);
 
     useEffect(() => {
         if (selectedOption != undefined && !validFlag && validFlag != undefined) {
@@ -111,35 +124,55 @@ const Categorias = () => {
     const renderCategory = () => {
         switch (categoryID) {
             case 1:
-                return <h1> Categoría 1 ! </h1>
+                return <>
+                    <h1> Variables </h1>
+                    <Carousel afterChange={onChange}>
+                        <div ref={carrouselRef} >
+                            <h3 style={contentStyle}>Variables primitivas</h3>
+                        </div>
+                        <div>
+                            <h3 style={contentStyle}>Variables no primitivas</h3>
+                        </div>
+                    </Carousel>
+                </>
                 break;
             case 2:
-                return <h1> Categoría 2 ! </h1>
+                return <>
+                    <h1> Condicionales </h1>
+                    <Carousel afterChange={onChange}>
+                        <div ref={carrouselRef} >
+                            <h3 style={contentStyle}>Conidcional If</h3>
+                        </div>
+                        <div>
+                            <h3 style={contentStyle}>Condicional Switch Case</h3>
+                        </div>
+                    </Carousel>
+                </>
                 break;
             case 3:
-                return <h1> Categoría 3 ! </h1>
+                return <>
+                    <h1> Bucles </h1>
+                    <Carousel afterChange={onChange}>
+                        <div ref={carrouselRef} >
+                            <h3 style={contentStyle}>Bucle For</h3>
+                        </div>
+                        <div>
+                            <h3 style={contentStyle}>Bucle While y Do While</h3>
+                        </div>
+                    </Carousel>
+                </>
                 break;
             default:
-                return <h1> Categoría no ecnontrada ! </h1>
+                return <h1> Categoría no encontrada ! </h1>
                 break;
         }
     }
 
-//    console.log(categoryID);
+    //    console.log(categoryID);
     return (
         <>
-        {renderCategory()}
-            <Carousel afterChange={onChange}>
-                <div ref={carrouselRef} >
-                    <h3 style={contentStyle}>Tema 1</h3>
-                </div>
-                <div>
-                    <h3 style={contentStyle}>Tema 2</h3>
-                </div>
-                <div>
-                    <h3 style={contentStyle}>Tema 3</h3>
-                </div>
-            </Carousel>
+            {renderCategory()}
+
         </>
     )
 };

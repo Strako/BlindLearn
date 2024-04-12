@@ -108,13 +108,13 @@ const Home = () => {
             <h1> Home ! </h1>
             <Carousel afterChange={onChange}>
                 <div ref={carrouselRef} >
-                    <h3 style={contentStyle}>1</h3>
+                    <h3 style={contentStyle}>Variables</h3>
                 </div>
                 <div>
-                    <h3 style={contentStyle}>2</h3>
+                    <h3 style={contentStyle}>Condicionales</h3>
                 </div>
                 <div>
-                    <h3 style={contentStyle}>3</h3>
+                    <h3 style={contentStyle}>Ciclos</h3>
                 </div>
             </Carousel>
         </>

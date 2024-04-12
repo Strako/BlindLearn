@@ -1,27 +1,16 @@
-import { Carousel } from 'antd';
+
 import speak from '../../Utils/TextToSpeech/TextToSpeech';
 import { useEffect, useRef, useState } from 'react';
-import { tutorialHome } from '../../Utils/TextToSpeech/tutorialsMessages';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { tutorialQuiz } from '../../Utils/TextToSpeech/tutorialsMessages';
+import { useNavigate } from 'react-router-dom';
+import questionsTema1 from '../../Utils/Temas/Tema1';
 
-
-
-const contentStyle: React.CSSProperties = {
-    margin: 0,
-    height: '500px',
-    color: '#fff',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#364d79',
-};
 
 const Tema1 = () => {
     //Constants
-    const [validFlag, setValidFlag] = useState<boolean>();
-    const [selectedOption, setSelectedOption] = useState<number>()
-    const carrouselRef = useRef<HTMLDivElement>(null)
     const navigate = useNavigate();
-
+    const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+    const [currentScore, setCurrentScore] = useState<number>(0);
 
     //Voice Recognition
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
@@ -36,22 +25,15 @@ const Tema1 = () => {
         if (event.results[0].isFinal) {
             //    setVoiceString(transcript);
             console.log("handler selected option: " + transcript)
-            switch (transcript) {
-                case 'tema 1':
-                    setSelectedOption(0);
-                    setValidFlag(true);
-                    break;
-                case 'tema 2':
-                    setSelectedOption(1);
-                    setValidFlag(true);
-                    break;
-                case 'tema 3':
-                    setSelectedOption(2);
-                    setValidFlag(true);
-                    break;
-                default:
-                    setSelectedOption(-1);
-                    setValidFlag(false)
+            if (transcript.toLowerCase() === questionsTema1.questions[currentQuestion].correctAnswer.toLowerCase()) {
+                setCurrentScore(currentScore + 1);
+                setCurrentQuestion(currentQuestion + 1);
+                console.log(currentScore)
+                localStorage.setItem('tema1', currentScore.toString());
+                speak("La respuesta es correcta")
+            } else {
+                setCurrentQuestion(currentQuestion + 1);
+                speak("La respuesta es incorrecta")
             }
         }
     };
@@ -60,68 +42,53 @@ const Tema1 = () => {
 
     };
 
-
     //Handlers
     const voiceHandler = () => {
         recognition.start();
     }
 
-    /* const handlerSelectedOption = () => {
- 
-     };
- */
     const handleKeyPress = (event: any) => {
         if (event.key === 'Escape') {
-            speak(tutorialHome);
+            speak(tutorialQuiz);
         }
         if (event.key === ' ') {
             voiceHandler();
+        }
+        if (event.key === '1') {
+            speak(questionsTema1.information);
+        }
+        if (event.key === '2') {
+            speak(questionsTema1.questions[currentQuestion].answers_tittle);
+        }
+        if (event.key === '3') {
+            speak("inciso a" + questionsTema1.questions[currentQuestion].answers.a + ", inciso b" + questionsTema1.questions[currentQuestion].answers.b + ", inciso c" + questionsTema1.questions[currentQuestion].answers.c) ;
+
         }
         //      if (event.key === 'Enter') {
         //          handlerSelectedOption();
         //      }
     };
 
-
-
     //Functions
-    const onChange = (currentSlide: number) => {
-        console.log("Slide: " + currentSlide);
-    };
 
     //useEffect Hooks
     useEffect(() => {
-        carrouselRef.current?.focus();
+        window.addEventListener('keydown', handleKeyPress);
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, []);
 
-        window.addEventListener('keydown', handleKeyPress)
-    });
-
-    useEffect(() => {
-        if (selectedOption != undefined && !validFlag && validFlag != undefined) {
-            speak("La opción no es valida");
-            console.log("!validFlag && selectedOption: " + selectedOption);
-            console.log(validFlag)
-        }
-        if (selectedOption != undefined && selectedOption !== -1) {
-            navigate("/subcategoría/" + selectedOption)
-        }
-    }, [validFlag, selectedOption]);
-
-    //    console.log(categoryID);
     return (
         <>
-            <h1> Tema 1 ! </h1>
-            <Carousel afterChange={onChange}>
-                <div ref={carrouselRef} >
-                    <h3 style={contentStyle}>1</h3>
-                </div>
-                <div>
-                    <h3 style={contentStyle}>2</h3>
-                </div>
-                <div>
-                    <h3 style={contentStyle}>3</h3>
-                </div>
-            </Carousel>
+            <h1 className='tittle'> {questionsTema1.tittle}</h1>
+            <article className='information'> {questionsTema1.information}</article>
+            <h2 className='question'>{questionsTema1.questions[currentQuestion].answers_tittle}</h2>
+            <h2 className='answers_tittle' > Respuestas</h2>
+            <h3 className='answers'>{'Inciso a): ' + questionsTema1.questions[currentQuestion].answers.a}</h3>
+            <h3 className='answers'>{'Inciso b): ' + questionsTema1.questions[currentQuestion].answers.b}</h3>
+            <h3 className='answers'>{'Inciso c): ' + questionsTema1.questions[currentQuestion].answers.c}</h3>
+
         </>
     )
 };
