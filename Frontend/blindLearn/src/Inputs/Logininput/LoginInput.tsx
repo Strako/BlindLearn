@@ -1,5 +1,3 @@
-import { Button, Form, Input } from 'antd';
-
 interface LoginInputProps{
     voiceString: string
 }

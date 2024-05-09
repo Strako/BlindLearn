@@ -3,7 +3,6 @@ import speak from '../../Utils/TextToSpeech/TextToSpeech';
 import { useEffect, useRef, useState } from 'react';
 import { tutorialHome } from '../../Utils/TextToSpeech/tutorialsMessages';
 import { useNavigate } from 'react-router-dom';
-
 const contentStyle: React.CSSProperties = {
     margin: 0,
     height: '500px',
@@ -74,6 +73,9 @@ const Home = () => {
         if (event.key === ' ') {
             voiceHandler();
         }
+        if (event.key === 'Enter') {
+            speak('Calificacion tema 1 es: ' + localStorage.getItem('tema1') || '0')
+        }
         //      if (event.key === 'Enter') {
         //          handlerSelectedOption();
         //      }
@@ -101,6 +103,7 @@ const Home = () => {
         }
         if (selectedOption != undefined && selectedOption !== -1) {
             navigate("/categorias/", {state:{ categoryID: selectedOption}})
+            window.location.reload();
         }
     }, [validFlag, selectedOption]);
     return (

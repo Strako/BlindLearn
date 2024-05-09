@@ -22,9 +22,6 @@ const Categorias = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const { categoryID } = state;
-
-
-
     //Voice Recognition
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
     recognition.lang = 'es-MX';
@@ -118,6 +115,7 @@ const Categorias = () => {
         }
         if (selectedOption != undefined && selectedOption !== -1) {
             navigate("/temas/" + selectedOption.toString())
+            window.location.reload();
         }
     }, [validFlag, selectedOption]);
 

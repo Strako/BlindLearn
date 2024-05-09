@@ -1,27 +1,21 @@
 import { tutorialCategory1, tutorialCategory2, tutorialCategory3} from '../TextToSpeech/tutorialsMessages'
 
 const selectMessage = (categoryID: number) => {
-    let result = "";
     switch (categoryID) {
         case 1:
-            result = tutorialCategory1;
-            console.log(result);
+            return tutorialCategory1;
             break;
         case 2:
-            result =  tutorialCategory2;
-            console.log(result);
+            return tutorialCategory2;
             break;
         case 3:
-            result =  tutorialCategory3;
-            console.log(result);
+            return tutorialCategory3;
             break;
         default:
-            result =  "Categoria no encontrada"
-            console.log(result);
+            return "Categoria no encontrada"
             break;
 
     }
-    return result;
 }
 
 export default selectMessage;

@@ -69,7 +69,7 @@ const Login = () => {
       <h1> Type your username !</h1>
 
       <div className="login-input-container">
-        <LoginInput voiceString={voiceString} />
+        <LoginInput voiceString={voiceString}/>
         <Button id="startButton" type="primary" onClick={voiceHandler}>{buttonText === "" ? "Start Voice Input" : buttonText}</Button>
       </div>
       <div>
