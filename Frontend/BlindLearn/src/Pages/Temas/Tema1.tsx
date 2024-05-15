@@ -6,11 +6,11 @@
     import questionsTema1 from '../../Utils/Temas/Tema1';
 
 
+
     const Tema1 = () => {
         //Constants
         const navigate = useNavigate();
         const [currentQuestion, setCurrentQuestion] = useState<number>(0);
-        //const [currentScore, setCurrentScore] = useState<number>(0);
         const tittle:String = 'Respuestas';
         let updatedCurrentQuestion:number = 0;
         let currentScore = 0;
