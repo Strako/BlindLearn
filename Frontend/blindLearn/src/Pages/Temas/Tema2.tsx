@@ -3,6 +3,9 @@ import speak from '../../Utils/TextToSpeech/TextToSpeech';
 import { useEffect, useRef, useState } from 'react';
 import { tutorialHome } from '../../Utils/TextToSpeech/tutorialsMessages';
 import { useNavigate } from 'react-router-dom';
+
+
+
 const contentStyle: React.CSSProperties = {
     margin: 0,
     height: '500px',
@@ -12,7 +15,7 @@ const contentStyle: React.CSSProperties = {
     background: '#364d79',
 };
 
-const Home = () => {
+const Tema2 = () => {
     //Constants
     const [validFlag, setValidFlag] = useState<boolean>();
     const [selectedOption, setSelectedOption] = useState<number>()
@@ -33,16 +36,16 @@ const Home = () => {
             //    setVoiceString(transcript);
             console.log("handler selected option: " + transcript)
             switch (transcript) {
-                case 'categoría 1':
+                case 'tema 1':
+                    setSelectedOption(0);
+                    setValidFlag(true);
+                    break;
+                case 'tema 2':
                     setSelectedOption(1);
                     setValidFlag(true);
                     break;
-                case 'categoría 2':
+                case 'tema 3':
                     setSelectedOption(2);
-                    setValidFlag(true);
-                    break;
-                case 'categoría 3':
-                    setSelectedOption(3);
                     setValidFlag(true);
                     break;
                 default:
@@ -73,9 +76,6 @@ const Home = () => {
         if (event.key === ' ') {
             voiceHandler();
         }
-        if (event.key === 'Enter') {
-            speak('Calificacion tema 1 es: ' + localStorage.getItem('tema1') || '0')
-        }
         //      if (event.key === 'Enter') {
         //          handlerSelectedOption();
         //      }
@@ -102,26 +102,27 @@ const Home = () => {
             console.log(validFlag)
         }
         if (selectedOption != undefined && selectedOption !== -1) {
-            navigate("/categorias/", {state:{ categoryID: selectedOption}})
-            window.location.reload();
+            navigate("/subcategoría/" + selectedOption)
         }
     }, [validFlag, selectedOption]);
+
+    //    console.log(categoryID);
     return (
         <>
-            <h1> Home ! </h1>
+            <h1> Tema 2 ! </h1>
             <Carousel afterChange={onChange}>
                 <div ref={carrouselRef} >
-                    <h3 style={contentStyle}>Variables</h3>
+                    <h3 style={contentStyle}>1</h3>
                 </div>
                 <div>
-                    <h3 style={contentStyle}>Condicionales</h3>
+                    <h3 style={contentStyle}>2</h3>
                 </div>
                 <div>
-                    <h3 style={contentStyle}>Ciclos</h3>
+                    <h3 style={contentStyle}>3</h3>
                 </div>
             </Carousel>
         </>
     )
 };
 
-export default Home;
+export default Tema2;

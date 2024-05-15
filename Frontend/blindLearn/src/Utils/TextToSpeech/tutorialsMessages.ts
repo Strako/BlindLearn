@@ -1,2 +1,6 @@
 export const tutorialLogin = "Para ingresar tu nombre de usuario presiona la barra espaciadora"
-export const tutorialHome = "Las categorías son: 1 categoría A, 2 categoría B, 3 categoría C, 4 categoría D, presiona la barra espaciadora e indica la categoría a seleccionar"
+export const tutorialHome = "Las categorías son: Categoría 1: Variables, Categoría 2: Condicionales, Categoría 3: Bucles, presiona la barra espaciadora e indica la categoría a seleccionar, ejemplo categoría 1"
+export const tutorialCategory1 = "Los temas son: Tema 1 Variables primitivas, Tema 2 Variables no primitivas, presiona la barra espaciadora e indica la categoría a seleccionar, ejemplo: Tema 1"
+export const tutorialCategory2 = "Los temas son: Tema 3 Conidcional If, Tema 4 Condicional Switch Case, presiona la barra espaciadora e indica la categoría a seleccionar, ejemplo: Tema 1"
+export const tutorialCategory3 = "Los temas son: Tema 5 Bucle For, Tema 6 Bucle While y Do While, presiona la barra espaciadora e indica la categoría a seleccionar, ejemplo: Tema 1"
+export const tutorialQuiz = "Presiona el numero 1 para leer la informacion, numero 2 para leer la pregunta y numero 3 para leer los incisos, selecciona tu respuesta con la barra espaciadora, ejemplo: inciso a"
