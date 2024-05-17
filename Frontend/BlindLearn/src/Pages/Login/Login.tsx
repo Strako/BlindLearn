@@ -66,11 +66,11 @@ const Login = () => {
 
   return (
     <>
-      <h1> Type your username !</h1>
+      <h1 className='usuario-titulo'> Ingresa tu nombre de usuario!   {String.fromCodePoint(0x1f603)}</h1>
 
       <div className="login-input-container">
         <LoginInput voiceString={voiceString}/>
-        <Button id="startButton" type="primary" onClick={voiceHandler}>{buttonText === "" ? "Start Voice Input" : buttonText}</Button>
+        <Button className = 'boton-login' id="startButton" type="primary" onClick={voiceHandler}>{buttonText === "" ? "Start Voice Input" : buttonText}</Button>
       </div>
       <div>
 

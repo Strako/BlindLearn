@@ -2,7 +2,7 @@ import speak from '../../Utils/TextToSpeech/TextToSpeech';
 import { useEffect, useState, useRef } from 'react';
 import { tutorialQuiz } from '../../Utils/TextToSpeech/tutorialsMessages';
 import { useNavigate } from 'react-router-dom';
-import questionsTema1 from '../../Utils/Temas/Tema2';
+import questionsTema1 from '../../Utils/Temas/Tema4';
 
 const Tema1 = () => {
     const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Tema1 = () => {
             if (lowerTranscript === correctAnswer) {
                 setCurrentScore(prevScore => {
                     const newScore = prevScore + 1;
-                    localStorage.setItem('tema2', newScore.toString());
+                    localStorage.setItem('tema4', newScore.toString());
                     return newScore;
                 });
                 speak("La respuesta es correcta");
@@ -54,6 +54,7 @@ const Tema1 = () => {
     };
 
     const handleKeyPress = (event: any) => {
+        console.log("hanlde key press executed")
         switch (event.key) {
             case 'Escape':
                 speak(tutorialQuiz);
@@ -76,7 +77,7 @@ const Tema1 = () => {
     };
 
     useEffect(() => {
-        localStorage.setItem('tema2', '0');
+        localStorage.setItem('tema4', '0');
         window.addEventListener('keydown', handleKeyPress);
         return () => {
             window.removeEventListener('keydown', handleKeyPress);
@@ -91,14 +92,14 @@ const Tema1 = () => {
         });
 
         if (currentQuestion === +questionsTema1.total) {
-            speak(`Calificacion tema 2 es: ${currentScore} puntos`);
+            speak(`Calificacion tema 4 es: ${currentScore} puntos`);
             navigate('/');
         }
     }, [currentQuestion, currentScore, navigate]);
 
     return (
         <>
-           <h1 className='tittle'>{questionsTema1.tittle}</h1>
+<h1 className='tittle'>{questionsTema1.tittle}</h1>
             <article className='information'>{questionsTema1.information}</article>
             <h2 className='question'>{currentQuestion < 10 ? questionsTema1.questions[currentQuestion].answers_tittle : 'Finalizado'}</h2>
             <h2 className='answers_tittle'>{tittle}</h2>

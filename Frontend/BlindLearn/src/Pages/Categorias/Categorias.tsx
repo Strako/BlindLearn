@@ -12,6 +12,7 @@ const contentStyle: React.CSSProperties = {
     lineHeight: '160px',
     textAlign: 'center',
     background: '#364d79',
+    fontSize:'120px'
 };
 
 const Categorias = () => {
@@ -123,39 +124,39 @@ const Categorias = () => {
         switch (categoryID) {
             case 1:
                 return <>
-                    <h1> Variables </h1>
+                    <h1> Operadores y estructuras de control </h1>
                     <Carousel afterChange={onChange}>
                         <div ref={carrouselRef} >
-                            <h3 style={contentStyle}>Variables primitivas</h3>
+                            <h3 style={contentStyle}>Operadores y Expresiones</h3>
                         </div>
                         <div>
-                            <h3 style={contentStyle}>Variables no primitivas</h3>
+                            <h3 style={contentStyle}>Estructuras de Control</h3>
                         </div>
                     </Carousel>
                 </>
                 break;
             case 2:
                 return <>
-                    <h1> Condicionales </h1>
+                    <h1> Funciones y arreglos </h1>
                     <Carousel afterChange={onChange}>
                         <div ref={carrouselRef} >
-                            <h3 style={contentStyle}>Conidcional If</h3>
+                            <h3 style={contentStyle}>Funciones y Modularidad</h3>
                         </div>
                         <div>
-                            <h3 style={contentStyle}>Condicional Switch Case</h3>
+                            <h3 style={contentStyle}>Arreglos y Listas</h3>
                         </div>
                     </Carousel>
                 </>
                 break;
             case 3:
                 return <>
-                    <h1> Bucles </h1>
+                    <h1> Objetos, clases y gestion de errores </h1>
                     <Carousel afterChange={onChange}>
                         <div ref={carrouselRef} >
-                            <h3 style={contentStyle}>Bucle For</h3>
+                            <h3 style={contentStyle}>Objetos y clases</h3>
                         </div>
                         <div>
-                            <h3 style={contentStyle}>Bucle While y Do While</h3>
+                            <h3 style={contentStyle}>Gestión de Errores y Excepciones</h3>
                         </div>
                     </Carousel>
                 </>
