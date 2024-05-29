@@ -1,5 +1,5 @@
 export const tutorialLogin = "Para ingresar tu nombre de usuario presiona la barra espaciadora"
-export const tutorialHome = "Las categorías son: Categoría 1: Operadores y estructuras de control, Categoría 2: Funciones y arreglos, Categoría 3: Objetos, clases y gestion de errores, presiona la barra espaciadora e indica la categoría a seleccionar, ejemplo categoría 1, presiona la tecla enter para escuchar tu puntaje"
+export const tutorialHome = "Obten ayuda con la tecla retroceso, Las categorías son: Categoría 1: Operadores y estructuras de control, Categoría 2: Funciones y arreglos, Categoría 3: Objetos, clases y gestion de errores, presiona la barra espaciadora e indica la categoría a seleccionar, ejemplo categoría 1, presiona la tecla enter para escuchar tu puntaje"
 export const tutorialCategory1 = "Los temas son: Tema 1 Operadores y Expresiones, Tema 2 Estructuras de Control, presiona la barra espaciadora e indica la categoría a seleccionar, ejemplo: Tema 1"
 export const tutorialCategory2 = "Los temas son: Tema 3 Funciones y Modularidad, Tema 4 Arreglos y Listas, presiona la barra espaciadora e indica la categoría a seleccionar, ejemplo: Tema 3"
 export const tutorialCategory3 = "Los temas son: Tema 5 Objetos y clases, Tema 6 Gestión de Errores y Excepciones, presiona la barra espaciadora e indica la categoría a seleccionar, ejemplo: Tema 5"

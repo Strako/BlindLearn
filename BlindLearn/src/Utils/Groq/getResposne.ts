@@ -7,7 +7,7 @@ const getResponse = async (message: string) => {
         'messages': [
             {
                 'role': 'user',
-                'content': message
+                'content': 'Response en Idioma español, responde al siguiente mensaje a manera de charla, con una respuesta no tan larga, al final pregunta si le gustaria hablar de algo mas. Mi mensaje es:  ' + message
             }
         ],
         'model': 'llama3-8b-8192'

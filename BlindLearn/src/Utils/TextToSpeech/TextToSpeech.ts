@@ -8,29 +8,29 @@ function speak(message: string): void {
 
   // Loop through the message
   while (currentIndex < message.length) {
-      // Find the end index for the current chunk
-      let endIndex = currentIndex + maxLength;
-      // If the endIndex is beyond the message length, set it to the message length
-      if (endIndex > message.length) {
-          endIndex = message.length;
-      } else {
-          // Find the nearest space before the endIndex
-          while (endIndex > currentIndex && message.charAt(endIndex) !== ' ') {
-              endIndex--;
-          }
-          // If no space is found, use the endIndex as is
-          if (endIndex === currentIndex) {
-              endIndex = currentIndex + maxLength;
-          }
+    // Find the end index for the current chunk
+    let endIndex = currentIndex + maxLength;
+    // If the endIndex is beyond the message length, set it to the message length
+    if (endIndex > message.length) {
+      endIndex = message.length;
+    } else {
+      // Find the nearest space before the endIndex
+      while (endIndex > currentIndex && message.charAt(endIndex) !== ' ') {
+        endIndex--;
       }
-      // Push the current chunk to the chunks array
-      chunks.push(message.substring(currentIndex, endIndex));
-      // Update the currentIndex for the next iteration
-      currentIndex = endIndex + 1; // Move past the space
+      // If no space is found, use the endIndex as is
+      if (endIndex === currentIndex) {
+        endIndex = currentIndex + maxLength;
+      }
+    }
+    // Push the current chunk to the chunks array
+    chunks.push(message.substring(currentIndex, endIndex));
+    // Update the currentIndex for the next iteration
+    currentIndex = endIndex + 1; // Move past the space
   }
   // Get the desired voice
   const voices = window.speechSynthesis.getVoices();
-  const desiredVoice = voices.find(voice => voice.name === "Google US English");
+  const desiredVoice = voices.find(voice => voice.name === "Google español");
 
   // Function to speak each chunk sequentially
   function speakChunk(index: number): void {
